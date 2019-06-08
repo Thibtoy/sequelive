@@ -5,9 +5,7 @@ module.exports = function(app, passport, isLoggedIn) {
 		.post(userController.user)
 
 	app.route('/login')
-		.get(passport.authenticate('local', {successRedirect: '/success', failureRedirect:'/'}), function(req, res){
-			res.send(req.user);
-		})
+		.get(passport.authenticate('local', {successRedirect: '/success', failureRedirect:'/'}));
 
 	app.route('/success')
 		.get(isLoggedIn, function(req,res){

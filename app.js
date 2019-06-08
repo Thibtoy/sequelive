@@ -43,7 +43,7 @@ passport.use(new localStrategy(function(username, password, done){
 }));
 
 passport.serializeUser(function(user, done){
-	done(null, user);
+	done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done){
@@ -54,11 +54,10 @@ passport.deserializeUser(function(id, done){
 
 function isLoggedIn(request, response, next) {
     // passport adds this to the request object
-    console.log(request.session.passport)
-    // if (request.isAuthenticated()) {
-    //     return next();
-    // }
-    // response.redirect('/');
+    if (request.isAuthenticated()) {
+        return next();
+    }
+    response.redirect('/');
 	}
 
 app.use('/', indexRouter);
